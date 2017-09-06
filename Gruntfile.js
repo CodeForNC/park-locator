@@ -79,7 +79,8 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          open: true,
+          port: 3000,
+          open: false,
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
@@ -234,7 +235,7 @@ module.exports = function (grunt) {
         src: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
-    }, 
+    },
 
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {

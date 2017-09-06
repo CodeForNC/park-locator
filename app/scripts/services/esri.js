@@ -6,7 +6,7 @@
 
     var service = this;
     var deferred = $q.defer();
-    
+
     service.modulesReady = function() {
       return deferred.promise;
     };
@@ -14,23 +14,23 @@
     angular.element(document).ready( function() {
 
       require([
-        'esri/map', 
+        'esri/map',
         'esri/graphic',
         'esri/layers/VectorTileLayer',
-        'esri/layers/ArcGISImageServiceLayer', 
+        'esri/layers/ArcGISImageServiceLayer',
         'esri/layers/GraphicsLayer',
         'esri/layers/FeatureLayer',
-        'esri/dijit/Search', 
-        'esri/renderers/SimpleRenderer', 
+        'esri/dijit/Search',
+        'esri/renderers/SimpleRenderer',
         'esri/renderers/UniqueValueRenderer',
         'esri/symbols/PictureMarkerSymbol',
         'esri/geometry/Point',
         'esri/tasks/query',
         'esri/tasks/QueryTask',
-        'dijit/TooltipDialog', 
+        'dijit/TooltipDialog',
         'dijit/popup',
         'dojo/domReady!'],
-        
+
         function( Map,
                   Graphic,
                   VectorTileLayer,
@@ -46,7 +46,7 @@
                   QueryTask,
                   TooltipDialog,
                   dijitPopup) {
-          
+
           // initialize the ESRI map
           service.map = new Map('map-canvas', {
             center: [-78.646, 35.785],
@@ -58,7 +58,8 @@
           });
 
           // Park Markers layer
-          service.parks = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', { 
+          // service.parks = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', {
+          service.parks = new FeatureLayer('http://maps.wakegov.com/arcgis/rest/services/OpenSpace/ParksinWake/MapServer/0/query?where=1%3D1&outFields=*&outSR=4326', {
             mode: FeatureLayer.MODE_SNAPSHOT,
             outFields: ['*'],
             id: 'parks'
@@ -74,6 +75,8 @@
             }
           });
           service.parks.setRenderer(parkSymbol);
+
+          console.log('parks info!', service.parks);
 
           // Base map layer
           service.basemapLayer = new VectorTileLayer('https://ral.maps.arcgis.com/sharing/rest/content/items/49d007c1e87249ef9581f5662989fb9a/resources/styles/root.json');
