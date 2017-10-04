@@ -59,7 +59,7 @@
 
           // Park Markers layer
           // service.parks = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', {
-          service.parks = new FeatureLayer('http://maps.wakegov.com/arcgis/rest/services/OpenSpace/ParksinWake/MapServer/0', {
+          service.parks = new FeatureLayer('http://maps.wakegov.com/arcgis/rest/services/OpenSpace/ParksinWake/MapServer/0/query?where=1%3D1&outFields=*&outSR=4326', {
             mode: FeatureLayer.MODE_SNAPSHOT,
             outFields: ['*'],
             id: 'parks'
@@ -93,10 +93,12 @@
           });
 
           // Greenway Layers
-          service.greenways = new FeatureLayer('http://maps.wakegov.com/arcgis/rest/services/OpenSpace/Greenways/MapServer/0', {
+          service.greenways = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0', {
             id: 'greenways'
           });
-
+          service.greenways2 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1', {
+            id: 'greenway-connectors'
+          });
           // Change the default green line renderer
           var greenwaysLine = new SimpleRenderer({
             type: 'simple',
@@ -108,10 +110,10 @@
             }
           });
           service.greenways.setRenderer(greenwaysLine);
+          service.greenways2.setRenderer(greenwaysLine);
 
           // Amenity Markers (outdoors)
-          // service.amenities1 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2', {
-          service.amenities1 = new FeatureLayer('http://maps.wakegov.com/arcgis/rest/services/OpenSpace/ParksinWake/MapServer/0', {
+          service.amenities1 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2', {
             mode: FeatureLayer.MODE_SNAPSHOT,
             outFields: ['*'],
             id: 'amenities-outdoors'
@@ -134,7 +136,7 @@
           // Layers are put on top of each other so later layers will show if overlapping with a previous layer
           service.map.addLayer(service.basemapLayer);
           service.map.addLayers([service.aerialLayer2013, service.aerialLayer, service.aerialLabels]);
-          service.map.addLayers([service.greenways, service.parks, service.tracker]);
+          service.map.addLayers([service.greenways, service.greenways2, service.parks, service.tracker]);
 
           // My Location graphic
           service.userMarker = new Graphic({

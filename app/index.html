@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
 <head>
 
   <title>City of Raleigh Park Locator</title>
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="styles/font-awesome.css">
   <!-- endbuild -->
 
-  
+
   <!-- build:css(.tmp) styles/park-locator.css -->
   <link rel="stylesheet" href="styles/park-locator.css">
   <!-- endbuild -->
@@ -42,7 +42,21 @@
     ga('create', 'UA-11110258-15', 'auto');
     ga('send', 'pageview');
   </script>
-  
+
+  <!-- Load Leaflet from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+  integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+  integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+  crossorigin=""></script>
+
+
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.1.1/dist/esri-leaflet.js"
+  integrity="sha512-ECQqaYZke9cSdqlFG08zSkudgrdF6I1d8ViSa7I3VIszJyVqw4ng1G8sehEXlumdMnFYfzY0tMgdQa4WCs9IUw=="
+  crossorigin=""></script>
+
 </head>
 
 
@@ -55,14 +69,14 @@
       <p><a href="http://browsehappy.com" class="md-button md-accent md-raised">More Information</a></p>
     </div>
   <![endif]-->
-  
+
   <md-sidenav class="gradient-primary md-sidenav-left md-whiteframe-z2" id="menu-sidenav"
               md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-      
+
       <sidenav-content></sidenav-content>
-    
+
   </md-sidenav>
-  
+
   <div id="main" role="main" class="flex layout-column">
     <ng-navbar></ng-navbar>
 
@@ -100,6 +114,9 @@
   <script src="scripts/modules/filters.js"></script>
   <script src="scripts/modules/directives.js"></script>
 
+<!--  Adding our own module to update to bigger and better things -->
+  <script src="park-locator/park-locator.module.js"></script>
+
   <!-- Services -->
   <script src="scripts/services/deviceService.js"></script>
   <script src="scripts/services/mapService.js"></script>
@@ -108,13 +125,13 @@
   <script src="scripts/services/parkService.js"></script>
   <script src="scripts/services/amenitiesService.js"></script>
   <script src="scripts/services/classesService.js"></script>
-  
+
   <script src="scripts/services/httpInterceptor.js"></script>
-  
+
   <!-- Filters -->
   <script src="scripts/filters/parkAmenities.js"></script>
   <script src="scripts/filters/selectedActivities.js"></script>
-  
+
 
   <!-- Controllers -->
   <script src="scripts/controllers/navbarCtrl.js"></script>
@@ -125,6 +142,8 @@
   <script src="scripts/controllers/parkCtrl.js"></script>
   <script src="scripts/controllers/classesCtrl.js"></script>
   <script src="scripts/controllers/sectionCtrl.js"></script>
+
+  <script src="park-locator/park-locator.controller.js"></script>
 
   <!-- Directives -->
   <script src="scripts/directives/fadeUpWhenReady.js"></script>

@@ -6,7 +6,7 @@
 
     .value('duScrollDuration', 600)
     .value('duScrollOffset', 0)
-    .value('duScrollEasing', function (t) { 
+    .value('duScrollEasing', function (t) {
       return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
     })
 
@@ -24,17 +24,17 @@
     }])
 
     .config([ '$mdIconProvider', function($mdIconProvider) {
-      $mdIconProvider.defaultIconSet('img/icons/core.svg', 48);       
+      $mdIconProvider.defaultIconSet('img/icons/core.svg', 48);
     }])
 
-    .config(['$stateProvider', '$urlRouterProvider', 
+    .config(['$stateProvider', '$urlRouterProvider',
       function ($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
           .state('home', {
-            url: '/',
+            url: '/home',
             templateUrl: 'views/main.html',
             controller: 'devicesCtrl'
           })
@@ -76,7 +76,7 @@
     }])
 
     .run(['$rootScope', '$state', function($rootScope, $state) {
-      
+
       $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
         event.preventDefault();
         if (toState.name === 'home.park') {
